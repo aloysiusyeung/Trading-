@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trading Game</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://s3.tradingview.com/tv.js"></script>
+  </head>
+  <body class="bg-slate-950 text-slate-100 min-h-screen">
+    <div class="max-w-7xl mx-auto p-4 space-y-4">
+      <header class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+        <h1 class="text-2xl font-bold">Trading Game Paper Exchange</h1>
+        <div class="flex items-center gap-2">
+          <input id="symbolInput" value="AAPL" class="bg-slate-900 border border-slate-700 px-3 py-2 rounded" />
+          <button id="loadSymbolBtn" class="bg-blue-600 px-4 py-2 rounded">Load</button>
+          <button id="logoutBtn" class="bg-slate-700 px-4 py-2 rounded hidden">Logout</button>
+        </div>
+      </header>
+
+      <section id="authSection" class="grid md:grid-cols-2 gap-4">
+        <form id="loginForm" class="bg-slate-900 border border-slate-800 rounded p-4 space-y-3">
+          <h2 class="font-semibold text-lg">Login</h2>
+          <input name="email" type="email" placeholder="Email" class="w-full bg-slate-950 border border-slate-700 px-3 py-2 rounded" required />
+          <input name="password" type="password" placeholder="Password" class="w-full bg-slate-950 border border-slate-700 px-3 py-2 rounded" required />
+          <button class="w-full bg-emerald-600 py-2 rounded">Login</button>
+        </form>
+        <form id="registerForm" class="bg-slate-900 border border-slate-800 rounded p-4 space-y-3">
+          <h2 class="font-semibold text-lg">Create account</h2>
+          <input name="username" placeholder="Username" class="w-full bg-slate-950 border border-slate-700 px-3 py-2 rounded" required />
+          <input name="email" type="email" placeholder="Email" class="w-full bg-slate-950 border border-slate-700 px-3 py-2 rounded" required />
+          <input name="password" type="password" placeholder="Password (min 6)" class="w-full bg-slate-950 border border-slate-700 px-3 py-2 rounded" required />
+          <button class="w-full bg-indigo-600 py-2 rounded">Register + get $100k</button>
+        </form>
+      </section>
+
+      <section id="appSection" class="hidden space-y-4">
+        <div class="grid lg:grid-cols-3 gap-4">
+          <div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded p-2">
+            <div id="tvChart" class="h-[500px]"></div>
+          </div>
+          <div class="space-y-4">
+            <div class="bg-slate-900 border border-slate-800 rounded p-4 space-y-2">
+              <h3 class="font-semibold">Portfolio</h3>
+              <p id="welcomeText" class="text-sm text-slate-300"></p>
+              <p>Cash: <span id="cashValue">$0.00</span></p>
+              <p>Equity: <span id="equityValue">$0.00</span></p>
+            </div>
+            <form id="tradeForm" class="bg-slate-900 border border-slate-800 rounded p-4 space-y-2">
+              <h3 class="font-semibold">Place paper trade</h3>
+              <select name="side" class="w-full bg-slate-950 border border-slate-700 px-3 py-2 rounded">
+                <option value="buy">Buy</option>
+                <option value="sell">Sell</option>
+              </select>
+              <input name="quantity" type="number" min="1" step="1" placeholder="Quantity" class="w-full bg-slate-950 border border-slate-700 px-3 py-2 rounded" required />
+              <button class="w-full bg-orange-600 py-2 rounded">Submit trade</button>
+            </form>
+            <div class="bg-slate-900 border border-slate-800 rounded p-4">
+              <h3 class="font-semibold mb-2">Leaderboard</h3>
+              <div id="leaderboard" class="text-sm space-y-1"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-4">
+          <div class="bg-slate-900 border border-slate-800 rounded p-4 lg:col-span-2">
+            <h3 class="font-semibold mb-2">Trade history</h3>
+            <div id="tradesTable" class="overflow-auto"></div>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 rounded p-4">
+            <h3 class="font-semibold mb-2">Company news & info</h3>
+            <div id="companyInfo" class="text-sm space-y-2"></div>
+            <div id="newsList" class="space-y-2 mt-3"></div>
+          </div>
+        </div>
+      </section>
+
+      <p id="status" class="text-sm text-cyan-300"></p>
+    </div>
+
+    <script src="./main.js" type="module"></script>
+  </body>
+</html>
